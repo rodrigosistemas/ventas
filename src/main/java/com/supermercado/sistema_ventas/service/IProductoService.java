@@ -1,5 +1,6 @@
 package com.supermercado.sistema_ventas.service;
 
+import com.supermercado.sistema_ventas.dto.ProductoDTO;
 import com.supermercado.sistema_ventas.model.entities.Producto;
 
 import java.util.List;
@@ -7,13 +8,16 @@ import java.util.List;
 public interface IProductoService {
 
     //Create
-    Producto save(Producto producto);
+    Producto save(ProductoDTO productoDto);
 
     //Read
-    List<Producto> getAll();
+    List<ProductoDTO> getAll();
+
+    // Read byId
+    ProductoDTO getById(Long productoId);
 
     //Update
-    Producto update(Producto producto, Long productoId);
+    Producto update(ProductoDTO productoDto, Long productoId);
 
     //Delete
     void delete(Long productoId);

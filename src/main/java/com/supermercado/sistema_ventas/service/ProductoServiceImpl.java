@@ -1,12 +1,15 @@
 package com.supermercado.sistema_ventas.service;
 
 import com.supermercado.sistema_ventas.dto.ProductoDTO;
+import com.supermercado.sistema_ventas.mapper.ProductoMapper;
 import com.supermercado.sistema_ventas.model.entities.Producto;
 import com.supermercado.sistema_ventas.model.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductoServiceImpl implements IProductoService {
@@ -15,22 +18,40 @@ public class ProductoServiceImpl implements IProductoService {
     private IProductoRepository repository;
 
     @Override
-    public Producto save(Producto producto) {
-        return repository.save(producto);
+    public Producto save(ProductoDTO productoDto) {
+        Producto producto = ProductoMapper.mapper.productoDTOToProducto(productoDto);
+        repository.save(producto);
+        return producto;
     }
 
     @Override
-    public List<Producto> getAll() {
-        return repository.findAll();
+    public List<ProductoDTO> getAll() {
+        List<Producto> productos = repository.findAll();
+        List<ProductoDTO> productoDtos = productos.stream()
+                .map(producto -> ProductoMapper.mapper.productoToProductDTO(producto))
+                .collect(Collectors.toList());
+        return productoDtos;
     }
 
     @Override
-    public Producto update(Producto producto, Long productoId) {
+    public ProductoDTO getById(Long productoId) {
+        Optional<Producto> productoOpt = repository.findById(productoId);
+        if (productoOpt.isPresent()) {
+            Producto producto = productoOpt.get();
+            return ProductoMapper.mapper.productoToProductDTO(producto);
+        }
+        return null;
+        // Also can be represented in a functional way
+    }
+
+    @Override
+    public Producto update(ProductoDTO productoDto, Long productoId) {
         return repository.findById(productoId)
                 .map(existingProducto -> {
-                    existingProducto.setNombre(producto.getNombre());
-                    existingProducto.setCategoriaProducto(producto.getCategoriaProducto());
-                    existingProducto.setPrecioActual(producto.getPrecioActual());
+                    // Mapper here
+                    //  existingProducto con los datos de productoDTO
+                    ProductoMapper.mapper.updateProductoFromDto(productoDto, existingProducto);
+
                     return repository.save(existingProducto);
                 }).orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + productoId));
     }
