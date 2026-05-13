@@ -1,5 +1,6 @@
 package com.supermercado.sistema_ventas.service;
 
+import com.supermercado.sistema_ventas.dto.SucursalDTO;
 import com.supermercado.sistema_ventas.model.entities.Sucursal;
 import com.supermercado.sistema_ventas.model.repository.ISucursalRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,11 @@ public class SucursalServiceImpl implements ISucursalService {
     @Override
     public List<Sucursal> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public SucursalDTO getById() {
+        return null;
     }
 
     @Override

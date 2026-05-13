@@ -37,7 +37,7 @@ public class ProductoServiceImpl implements IProductoService {
     public ProductoDTO getById(Long productoId) {
         Optional<Producto> productoOpt = repository.findById(productoId);
         if (productoOpt.isPresent()) {
-            Producto producto = productoOpt.get();
+            Producto producto = productoOpt.get(); // If a value is present then return the value
             return ProductoMapper.mapper.productoToProductDTO(producto);
         }
         return null;
@@ -49,7 +49,6 @@ public class ProductoServiceImpl implements IProductoService {
         return repository.findById(productoId)
                 .map(existingProducto -> {
                     // Mapper here
-                    //  existingProducto con los datos de productoDTO
                     ProductoMapper.mapper.updateProductoFromDto(productoDto, existingProducto);
 
                     return repository.save(existingProducto);
@@ -57,7 +56,7 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public void delete(Long productoId) {
+    public void deleteById(Long productoId) {
         repository.deleteById(productoId);
     }
 }

@@ -20,6 +20,6 @@ public interface IProductoService {
     Producto update(ProductoDTO productoDto, Long productoId);
 
     //Delete
-    void delete(Long productoId);
+    void deleteById(Long productoId);
 
 }
