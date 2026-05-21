@@ -20,6 +20,6 @@ public class Sucursal {
     private String rs;
     private String nomComercial;
     private String direccion;
-    private Long RUC;
+    private String RUC;
 
 }

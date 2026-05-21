@@ -6,5 +6,6 @@ public enum CategoriaProducto {
     BEBIDAS,
     CUIDADO_PERSONAL,
     LIMPIEZA,
+    LACTEOS,
     OTROS
 }
