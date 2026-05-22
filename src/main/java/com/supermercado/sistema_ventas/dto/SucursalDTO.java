@@ -13,6 +13,6 @@ public class SucursalDTO {
     private String rs;
     private String nomComercial;
     private String direccion;
-    private int RUC;
+    private String RUC;
 
 }

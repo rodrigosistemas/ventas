@@ -27,10 +27,10 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     public List<ProductoDTO> getAll() {
         List<Producto> productos = repository.findAll();
-        List<ProductoDTO> productoDtos = productos.stream()
+        List<ProductoDTO> productosDtos = productos.stream()
                 .map(producto -> ProductoMapper.mapper.productoToProductDTO(producto))
                 .collect(Collectors.toList());
-        return productoDtos;
+        return productosDtos;
     }
 
     @Override

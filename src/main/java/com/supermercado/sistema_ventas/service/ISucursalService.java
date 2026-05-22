@@ -8,19 +8,19 @@ import java.util.List;
 public interface ISucursalService {
 
     //Create
-    Sucursal save(Sucursal sucursal);
+    Sucursal save(SucursalDTO sucursalDto);
 
     //Read
-    List<Sucursal> getAll();
+    List<SucursalDTO> getAll();
 
     // Read byId
-    SucursalDTO getById();
+    SucursalDTO getById(Long sucursalId);
 
     //Update
-    Sucursal update(Sucursal sucursal, Long sucursalId);
+    Sucursal update(SucursalDTO sucursalDto, Long sucursalId);
 
     //Delete
-    void delete(Long sucursalId);
+    void deleteById(Long sucursalId);
 
 }
 
