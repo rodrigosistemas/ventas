@@ -1,6 +1,7 @@
 package com.supermercado.sistema_ventas.service;
 
-import com.supermercado.sistema_ventas.dto.SucursalDTO;
+import com.supermercado.sistema_ventas.dto.request.RequestSucursalDTO;
+import com.supermercado.sistema_ventas.dto.response.ResponseSucursalDTO;
 import com.supermercado.sistema_ventas.model.entities.Sucursal;
 
 import java.util.List;
@@ -8,16 +9,16 @@ import java.util.List;
 public interface ISucursalService {
 
     //Create
-    Sucursal save(SucursalDTO sucursalDto);
+    Sucursal save(RequestSucursalDTO requestSucursalDTO);
 
     //Read
-    List<SucursalDTO> getAll();
+    List<ResponseSucursalDTO> getAll();
 
     // Read byId
-    SucursalDTO getById(Long sucursalId);
+    ResponseSucursalDTO getById(Long sucursalId);
 
     //Update
-    Sucursal update(SucursalDTO sucursalDto, Long sucursalId);
+    Sucursal update(RequestSucursalDTO requestSucursalDTO, Long sucursalId);
 
     //Delete
     void deleteById(Long sucursalId);

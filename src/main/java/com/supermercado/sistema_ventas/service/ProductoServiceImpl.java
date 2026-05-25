@@ -18,8 +18,8 @@ public class ProductoServiceImpl implements IProductoService {
     private IProductoRepository repository;
 
     @Override
-    public Producto save(ProductoDTO productoDto) {
-        Producto producto = ProductoMapper.mapper.productoDTOToProducto(productoDto);
+    public Producto save(ProductoDTO productoDTO) {
+        Producto producto = ProductoMapper.mapper.productoDTOToProducto(productoDTO);
         repository.save(producto);
         return producto;
     }
@@ -27,10 +27,10 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     public List<ProductoDTO> getAll() {
         List<Producto> productos = repository.findAll();
-        List<ProductoDTO> productosDtos = productos.stream()
+        List<ProductoDTO> productoDTOS = productos.stream()
                 .map(producto -> ProductoMapper.mapper.productoToProductDTO(producto))
                 .collect(Collectors.toList());
-        return productosDtos;
+        return productoDTOS;
     }
 
     @Override
@@ -45,11 +45,11 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public Producto update(ProductoDTO productoDto, Long productoId) {
+    public Producto update(ProductoDTO productoDTO, Long productoId) {
         return repository.findById(productoId)
                 .map(existingProducto -> {
                     // Mapper here
-                    ProductoMapper.mapper.updateProductoFromDto(productoDto, existingProducto);
+                    ProductoMapper.mapper.updateProductoFromDto(productoDTO, existingProducto);
 
                     return repository.save(existingProducto);
                 }).orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + productoId));

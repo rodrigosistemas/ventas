@@ -1,7 +1,6 @@
-package com.supermercado.sistema_ventas.model.entities;
+package com.supermercado.sistema_ventas.dto.request;
 
 import com.supermercado.sistema_ventas.enums.EstadoVenta;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,19 +9,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Venta {
+public class RequestVentaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate fecha;
-    // Agregar estado por defecto
     private EstadoVenta estado;
-    @ManyToOne
-    private Sucursal sucursal;
+    private Long idSucursal;
     private BigDecimal total;
 
 }

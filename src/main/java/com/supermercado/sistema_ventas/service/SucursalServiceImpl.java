@@ -1,6 +1,7 @@
 package com.supermercado.sistema_ventas.service;
 
-import com.supermercado.sistema_ventas.dto.SucursalDTO;
+import com.supermercado.sistema_ventas.dto.request.RequestSucursalDTO;
+import com.supermercado.sistema_ventas.dto.response.ResponseSucursalDTO;
 import com.supermercado.sistema_ventas.mapper.SucursalMapper;
 import com.supermercado.sistema_ventas.model.entities.Sucursal;
 import com.supermercado.sistema_ventas.model.repository.ISucursalRepository;
@@ -18,23 +19,23 @@ public class SucursalServiceImpl implements ISucursalService {
     private ISucursalRepository repository;
 
     @Override
-    public Sucursal save(SucursalDTO sucursalDto) {
-        Sucursal sucursal = SucursalMapper.mapper.sucursalDTOToSucursal(sucursalDto);
+    public Sucursal save(RequestSucursalDTO requestSucursalDTO) {
+        Sucursal sucursal = SucursalMapper.mapper.sucursalDTOToSucursal(requestSucursalDTO);
         repository.save(sucursal);
         return sucursal;
     }
 
     @Override
-    public List<SucursalDTO> getAll() {
+    public List<ResponseSucursalDTO> getAll() {
         List<Sucursal> sucursales = repository.findAll();
-        List<SucursalDTO> sucursalesDtos = sucursales.stream()
+        List<ResponseSucursalDTO> sucursalesDtos = sucursales.stream()
                 .map(sucursal -> SucursalMapper.mapper.sucursalToSucursalDTO(sucursal))
                 .collect(Collectors.toList());
         return sucursalesDtos;
     }
 
     @Override
-    public SucursalDTO getById(Long sucursalId) {
+    public ResponseSucursalDTO getById(Long sucursalId) {
         Optional<Sucursal> sucursalOpt = repository.findById(sucursalId);
         if (sucursalOpt.isPresent()) {
             Sucursal sucursal = sucursalOpt.get(); // If a value is present then return the value
@@ -45,11 +46,11 @@ public class SucursalServiceImpl implements ISucursalService {
     }
 
     @Override
-    public Sucursal update(SucursalDTO sucursalDto, Long sucursalId) {
+    public Sucursal update(RequestSucursalDTO requestSucursalDTO, Long sucursalId) {
         return repository.findById(sucursalId)
                 .map(existingSucursal -> {
                     // Mapper here
-                    SucursalMapper.mapper.updateSucursalFromDto(sucursalDto, existingSucursal);
+                    SucursalMapper.mapper.updateSucursalFromDto(requestSucursalDTO, existingSucursal);
 
                     return repository.save(existingSucursal);
                 }).orElseThrow(() -> new RuntimeException("Sucursal no encontrada con id: " +sucursalId));

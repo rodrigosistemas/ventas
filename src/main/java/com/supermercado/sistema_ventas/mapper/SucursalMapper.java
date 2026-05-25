@@ -1,6 +1,7 @@
 package com.supermercado.sistema_ventas.mapper;
 
-import com.supermercado.sistema_ventas.dto.SucursalDTO;
+import com.supermercado.sistema_ventas.dto.request.RequestSucursalDTO;
+import com.supermercado.sistema_ventas.dto.response.ResponseSucursalDTO;
 import com.supermercado.sistema_ventas.model.entities.Sucursal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,11 +13,11 @@ public interface SucursalMapper {
 
     SucursalMapper mapper = Mappers.getMapper(SucursalMapper.class);
 
-    SucursalDTO sucursalToSucursalDTO(Sucursal sucursal);
+    ResponseSucursalDTO sucursalToSucursalDTO(Sucursal sucursal);
 
-    Sucursal sucursalDTOToSucursal(SucursalDTO sucursalDTO);
+    Sucursal sucursalDTOToSucursal(RequestSucursalDTO requestSucursalDTO);
 
     @Mapping(target="id", ignore=true)
-    void updateSucursalFromDto(SucursalDTO dto, @MappingTarget Sucursal sucursal);
+    void updateSucursalFromDto(RequestSucursalDTO dto, @MappingTarget Sucursal sucursal);
 
 }

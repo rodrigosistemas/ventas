@@ -1,5 +1,8 @@
-/*package com.supermercado.sistema_ventas.service;
+package com.supermercado.sistema_ventas.service;
 
+import com.supermercado.sistema_ventas.dto.request.RequestVentaDTO;
+import com.supermercado.sistema_ventas.dto.response.ResponseVentaDTO;
+import com.supermercado.sistema_ventas.mapper.VentaMapper;
 import com.supermercado.sistema_ventas.model.entities.Venta;
 import com.supermercado.sistema_ventas.model.repository.IVentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +17,24 @@ public class VentaServiceImpl implements IVentaService {
     private IVentaRepository repository;
 
     @Override
-    public Venta save(Venta venta) {
-        return null;
+    public Venta save(RequestVentaDTO requestVentaDTO) {
+        Venta venta = VentaMapper.mapper.ventaDTOToVenta(requestVentaDTO);
+        repository.save(venta);
+        return venta;
     }
 
     @Override
-    public List<Venta> getAll() {
+    public List<ResponseVentaDTO> getAll() {
         return List.of();
     }
 
     @Override
-    public Venta update(Venta venta, Long ventaId) {
+    public ResponseVentaDTO getById(Long ventaId) {
+        return null;
+    }
+
+    @Override
+    public Venta update(RequestVentaDTO requestVentaDTO, Long ventaId) {
         return null;
     }
 
@@ -32,4 +42,4 @@ public class VentaServiceImpl implements IVentaService {
     public void delete(Long ventaId) {
 
     }
-}*/
+}

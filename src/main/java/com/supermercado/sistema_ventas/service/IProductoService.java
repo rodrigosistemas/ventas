@@ -8,7 +8,7 @@ import java.util.List;
 public interface IProductoService {
 
     //Create
-    Producto save(ProductoDTO productoDto);
+    Producto save(ProductoDTO productoDTO);
 
     //Read
     List<ProductoDTO> getAll();
@@ -17,7 +17,7 @@ public interface IProductoService {
     ProductoDTO getById(Long productoId);
 
     //Update
-    Producto update(ProductoDTO productoDto, Long productoId);
+    Producto update(ProductoDTO productoDTO, Long productoId);
 
     //Delete
     void deleteById(Long productoId);
