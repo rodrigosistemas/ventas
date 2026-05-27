@@ -8,7 +8,7 @@ import java.util.List;
 public interface IProductoService {
 
     //Create
-    Producto save(ProductoDTO productoDTO);
+    ProductoDTO save(ProductoDTO productoDTO);
 
     //Read
     List<ProductoDTO> getAll();

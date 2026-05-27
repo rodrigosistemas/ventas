@@ -3,6 +3,7 @@ package com.supermercado.sistema_ventas.service;
 import com.supermercado.sistema_ventas.dto.request.RequestVentaDTO;
 import com.supermercado.sistema_ventas.dto.response.ResponseVentaDTO;
 import com.supermercado.sistema_ventas.mapper.VentaMapper;
+import com.supermercado.sistema_ventas.mapper.VentaMapperImpl;
 import com.supermercado.sistema_ventas.model.entities.Venta;
 import com.supermercado.sistema_ventas.model.repository.IVentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ public class VentaServiceImpl implements IVentaService {
     private IVentaRepository repository;
 
     @Override
-    public Venta save(RequestVentaDTO requestVentaDTO) {
+    public ResponseVentaDTO save(RequestVentaDTO requestVentaDTO) {
+        // 1. Convert DTO to Entity for saving
         Venta venta = VentaMapper.mapper.ventaDTOToVenta(requestVentaDTO);
-        repository.save(venta);
-        return venta;
+        // 2. Save sale in bd
+        Venta ventaSaved = repository.save(venta);
+        return VentaMapperImpl.mapper.ventaToVentaDTO(ventaSaved);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.supermercado.sistema_ventas.controller;
 
 import com.supermercado.sistema_ventas.dto.request.RequestVentaDTO;
+import com.supermercado.sistema_ventas.dto.response.ResponseVentaDTO;
 import com.supermercado.sistema_ventas.model.entities.Venta;
 import com.supermercado.sistema_ventas.service.IVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class VentaController {
     private IVentaService service;
 
     @PostMapping("/ventas")
-    public Venta saveVenta(@RequestBody RequestVentaDTO requestVentaDTO) {
+    public ResponseVentaDTO saveVenta(@RequestBody RequestVentaDTO requestVentaDTO) {
         return service.save(requestVentaDTO);
     }
 

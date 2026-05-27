@@ -9,7 +9,7 @@ import java.util.List;
 public interface IVentaService {
 
     //Create
-    Venta save(RequestVentaDTO requestVentaDTO);
+    ResponseVentaDTO save(RequestVentaDTO requestVentaDTO);
 
     //Read
     List<ResponseVentaDTO> getAll();

@@ -18,10 +18,13 @@ public class ProductoServiceImpl implements IProductoService {
     private IProductoRepository repository;
 
     @Override
-    public Producto save(ProductoDTO productoDTO) {
+    public ProductoDTO save(ProductoDTO productoDTO) {
+        // 1. Convert DTO to Entity for saving
         Producto producto = ProductoMapper.mapper.productoDTOToProducto(productoDTO);
-        repository.save(producto);
-        return producto;
+        // 2. Save product in bd
+        Producto productoSaved = repository.save(producto);
+        // 3. Convert entity saved in bd to response
+        return ProductoMapper.mapper.productoToProductDTO(productoSaved);
     }
 
     @Override
